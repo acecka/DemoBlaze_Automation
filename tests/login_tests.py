@@ -2,6 +2,7 @@ from tests.base_test import BaseTest
 
 from time import sleep
 
+
 class LoginTest(BaseTest):
     def setUp(self):
         super().setUp()
@@ -27,6 +28,9 @@ class LoginTest(BaseTest):
         # 4. Sprawdź, czy w prawym górnym rogu widnieje powitanie "Welcome tester_alk"
         welcome_text_act = self.home_page.get_welcome_username_text()
         self.assertEqual(f"Welcome {username}", welcome_text_act)
-        # 5. (Sprawdź, czy można kliknąć LogOut)
+        # 5. (Sprawdź, czy przyciski zmienily zawartosc na Log in, Sign up)
+        self.home_page.click_logout()
+        self.assertEqual("Log in", self.home_page.get_login_text())
+        self.assertEqual("Sign up", self.home_page.get_sign_up_text())
         # TODO:
         sleep(1.5)
