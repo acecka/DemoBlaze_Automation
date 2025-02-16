@@ -69,7 +69,7 @@ class HomePage(BasePage):
         assert self.driver.title == "STORE"
         # ... TODO: Więcej...
 
-    def click_logout(self):
+    def click_log_out(self):
         """
         finds and clicks logout
         :return:
