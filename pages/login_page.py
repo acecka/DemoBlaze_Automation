@@ -3,6 +3,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 
 
+
 class LoginpageLocators:
     LOG_IN_BUTTON = (By.XPATH, '//button[@onclick="logIn()"]')
     USERNAME_INPUT = (By.ID, "loginusername")

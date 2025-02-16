@@ -1,8 +1,11 @@
+import test_data.test_data
 from tests.base_test import BaseTest
+from ddt import data, unpack, ddt
 
 from time import sleep
 
 
+@ddt
 class LoginTest(BaseTest):
     def setUp(self):
         super().setUp()
@@ -17,12 +20,14 @@ class LoginTest(BaseTest):
         self.assertEqual("Please fill out Username and Password.", self.login_page.get_alert_message())
         self.login_page.confirm_alert()
 
-    def testValidLogin(self):
-        username = "tester_alk"
+    @data(*test_data.test_data.DataReader.get_csv_data("../test_data/valid_login_credentials.csv"))
+    @unpack
+    def testValidLogin(self, username, password):
+        # username = "tester_alk
         # 1. Wpisz login
         self.login_page.enter_username(username)
         # 2. Wpisz haslo
-        self.login_page.enter_password("haslo")
+        self.login_page.enter_password(password)
         # 3. Kliknij Log In
         self.login_page.click_log_in()
         # 4. Sprawdź, czy w prawym górnym rogu widnieje powitanie "Welcome tester_alk"
@@ -32,5 +37,4 @@ class LoginTest(BaseTest):
         self.home_page.click_logout()
         self.assertEqual("Log in", self.home_page.get_login_text())
         self.assertEqual("Sign up", self.home_page.get_sign_up_text())
-        # TODO:
         sleep(1.5)
